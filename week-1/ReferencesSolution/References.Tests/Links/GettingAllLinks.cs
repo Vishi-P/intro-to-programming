@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alba;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace References.Tests.Links;
 
-internal class GettingAllLinks
+public class GettingAllLinks
 {
     [Fact]
     public async Task GettingLinksReturnsA200Ok()
     {
         // GET /links
-        var client = new HttpClient();
-        client.BaseAddress = new Uri("http://localhost:1337");
+        var host = await AlbaHost.For<Program>();
 
-        var response = await client.GetAsync("/links");
-        Assert.NotNull(response);
-
-        Assert.Equal(System.Net.Http.HttpStatusCode.OK, response.StatusCode);
+        await host.Scenario(api =>
+        {
+            api.Get.Url("/links");
+            api.StatusCodeShouldBeOk();
+        });
     }
 }

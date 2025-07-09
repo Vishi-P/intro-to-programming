@@ -19,4 +19,14 @@ public class AddingNumbers
         Assert.Equal(30, answer);
         // This is a simple example, even though it's stupid
     }
+
+    [Theory]
+    [InlineData(10, 20, 30)]
+    [InlineData(2,2,4)]
+    [InlineData(10,3,13)]
+    public void CanAddAnyTwoIntegers(int a, int b, int expected)
+    {
+        int answer = a + b;
+        Assert.Equal(expected, answer);
+    }
 }

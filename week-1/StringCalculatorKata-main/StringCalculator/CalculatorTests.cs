@@ -65,7 +65,7 @@ public class CalculatorTests
 
     // Number 6
     [Theory]
-    [InlineData("//#\\n1#2#3", 6)]
+    [InlineData("//#\n1#2#3", 6)]
     [InlineData("//#\n1#2,3\n1", 7)]
     public void CustomDelimiters(string values, int expected)
     {

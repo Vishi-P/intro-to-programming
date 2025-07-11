@@ -2,23 +2,28 @@
 
 namespace Banking.Domain;
 
-public struct TransactionAmount
+public readonly struct TransactionAmount
 {
-    public decimal Value { get; private set; }
+    private readonly decimal _amount;
 
-    private TransactionAmount (decimal value)
-    {
-        Value = value;
-    }
-    // Factory Method
-
-    public static TransactionAmount FromDecimal (decimal amount)
+    public TransactionAmount (decimal amount)
     {
         if (amount <= 0)
         {
             throw new InvalidTransactionAmountException();
         }
-        return new TransactionAmount (amount);
+
+        _amount = amount;
+    }
+
+    public static implicit operator decimal(TransactionAmount tx)
+    {
+        return tx._amount;
+    }
+
+    public static implicit operator TransactionAmount(decimal val)
+    {
+        return new TransactionAmount(val);
     }
 }
 

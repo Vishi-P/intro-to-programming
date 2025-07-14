@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+} from '@angular/core';
 
 @Component({
   selector: 'app-demos-counter',
@@ -14,17 +19,27 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
         +
       </button>
     </div>
+
+    <div>
+      @if (isEven()) {
+        <p>It is Even</p>
+      } @else {
+        <p>It is Odd!</p>
+      }
+    </div>
   `,
   styles: ``,
 })
 export class Counter {
   current = signal(0);
 
+  isEven = computed(() => this.current() % 2 === 0);
+
   decrement() {
-    this.current -= 1;
+    this.current.update((c) => c - 1);
   }
 
   increment() {
-    this.current += 1;
+    this.current.update((c) => c + 1);
   }
 }

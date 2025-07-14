@@ -73,4 +73,7 @@ public class CalculatorTests
         var result = calculator.Add(values);
         Assert.Equal(expected, result);
     }
+
+    // Number 7
+
 }
